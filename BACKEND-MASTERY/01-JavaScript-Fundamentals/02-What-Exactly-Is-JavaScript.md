@@ -16,17 +16,67 @@ reading_time: "50-60 Minutes"
 
 - [Learning Objectives](#learning-objectives)
 - [Prerequisites](#prerequisites)
+
+## Understanding JavaScript
 - [What is JavaScript?](#what-is-javascript)
+- [Breaking the Definition](#breaking-the-definition)
 - [Why Was JavaScript Designed?](#why-was-javascript-designed)
+- [JavaScript is More Than a Browser Language](#javascript-is-more-than-a-browser-language)
 - [Characteristics of JavaScript](#characteristics-of-javascript)
+
+## High-Level Languages
+- [High-Level vs Low-Level Programming Languages](#high-level-vs-low-level-programming-languages)
+- [The Language of Computers](#the-language-of-computers)
+- [Machine Language](#machine-language)
+- [Low-Level Languages](#low-level-languages)
+- [High-Level Languages](#high-level-languages)
+- [Advantages of High-Level Languages](#advantages-of-high-level-languages)
+- [Disadvantages of High-Level Languages](#disadvantages-of-high-level-languages)
+- [Comparison Table](#comparison-table)
+
+## Compilation & Interpretation
+- [Interpreted vs Compiled Languages](#interpreted-vs-compiled-languages)
+- [What is a Compiler?](#what-is-a-compiler)
+- [What is an Interpreter?](#what-is-an-interpreter)
+- [Compiler vs Interpreter](#compiler-vs-interpreter)
+- [The Solution: Just-In-Time (JIT) Compilation](#the-solution-just-in-time-jit-compilation)
+
+## Dynamic Typing
+- [Static Typing vs Dynamic Typing](#static-typing-vs-dynamic-typing)
+- [What is a Data Type?](#what-is-a-data-type)
+- [Variables and Types](#variables-and-types)
+- [What is Static Typing?](#what-is-static-typing)
+- [What is Dynamic Typing?](#what-is-dynamic-typing)
+- [Advantages of Dynamic Typing](#advantages-of-dynamic-typing)
+- [Disadvantages of Dynamic Typing](#disadvantages-of-dynamic-typing)
+- [Static vs Dynamic Typing](#static-vs-dynamic-typing)
+
+## Multi-Paradigm Programming
+- [Multi-Paradigm Programming Language](#multi-paradigm-programming-language)
+- [What is a Programming Paradigm?](#what-is-a-programming-paradigm)
+- [Procedural Programming](#1-procedural-programming)
+- [Object-Oriented Programming (OOP)](#2-object-oriented-programming-oop)
+- [Functional Programming](#3-functional-programming)
+- [Comparison](#comparison)
+
+## JavaScript Runtime Environments
 - [Where Can JavaScript Run?](#where-can-javascript-run)
-- [JavaScript in Action](#javascript-in-action)
-- [Did You Know?](#did-you-know)
-- [Common Misconceptions](#common-misconceptions)
-- [Key Takeaways](#key-takeaways)
-- [Summary](#summary)
-- [Interview Questions](#interview-questions)
+- [What Does It Mean to "Run" JavaScript?](#what-does-it-mean-to-run-javascript)
+- [What is a JavaScript Engine?](#what-is-a-javascript-engine)
+- [Different JavaScript Engines](#different-javascript-engines)
+- [JavaScript in the Browser](#javascript-in-the-browser)
+- [JavaScript Outside the Browser](#javascript-outside-the-browser)
+- [Browser vs Node.js](#browser-vs-nodejs)
+- [Browser APIs vs Node.js APIs](#browser-apis-vs-nodejs-apis)
+
+## Revision
+- [Chapter Summary](#chapter-summary)
+- [Revision Sheet (1-Page Quick Revision)](#revision-sheet-1-page-quick-revision)
+- [Frequently Asked Interview Questions](#frequently-asked-interview-questions)
+- [Concept Check Quiz](#concept-check-quiz)
 - [Practice Exercises](#practice-exercises)
+- [Glossary](#glossary)
+- [Key Takeaways](#key-takeaways)
 
 ---
 
