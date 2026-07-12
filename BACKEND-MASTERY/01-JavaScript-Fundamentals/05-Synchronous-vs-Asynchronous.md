@@ -4320,3 +4320,442 @@ The Event Loop only checks whether callbacks are ready to run.
 4. Why does `setTimeout(fn, 0)` execute later?
 5. Can the Event Loop interrupt synchronous code?
 6. What happens after a timer finishes?
+# Part 9 — Microtask Queue vs Callback Queue
+
+---
+
+# 📑 Topics Covered
+
+- What is a Queue?
+- Callback Queue (Macrotask Queue)
+- Microtask Queue
+- Priority of Queues
+- Promise vs setTimeout
+- Multiple Examples
+- Execution Flow
+- Common Mistakes
+
+---
+
+# 🤔 What is a Queue?
+
+A queue is a data structure that follows the **FIFO (First In, First Out)** principle.
+
+```
+Front                  Rear
+
+Task1 → Task2 → Task3
+```
+
+The first task that enters is the first one to execute.
+
+---
+
+# 🗂️ JavaScript Uses Two Important Queues
+
+```
+                Runtime
+
+          ┌───────────────┐
+          │ Callback Queue│
+          └───────────────┘
+
+          ┌───────────────┐
+          │ Microtask Queue│
+          └───────────────┘
+```
+
+Both store callbacks waiting to execute.
+
+The difference is **priority**.
+
+---
+
+# 📖 Callback Queue (Macrotask Queue)
+
+The Callback Queue stores callbacks from APIs like:
+
+- `setTimeout()`
+- `setInterval()`
+- DOM Events
+- I/O operations (Node.js)
+
+Example:
+
+```javascript
+setTimeout(() => {
+    console.log("Timer");
+}, 1000);
+```
+
+After the timer finishes:
+
+```
+Runtime
+
+↓
+
+Callback Queue
+
+↓
+
+Event Loop
+
+↓
+
+Call Stack
+```
+
+---
+
+# 📖 Microtask Queue
+
+The Microtask Queue stores high-priority tasks.
+
+Examples:
+
+- Promise `.then()`
+- Promise `.catch()`
+- Promise `.finally()`
+- `queueMicrotask()`
+
+Example:
+
+```javascript
+Promise.resolve()
+
+.then(() => {
+    console.log("Promise");
+});
+```
+
+The callback goes into the **Microtask Queue**.
+
+---
+
+# 🚨 Priority Rule
+
+Whenever the Call Stack becomes empty:
+
+1. Execute **all Microtasks**
+2. Then execute **one Callback Queue task**
+3. Repeat
+
+Visual:
+
+```
+Call Stack Empty
+
+        ↓
+
+Microtask Queue
+
+        ↓
+
+Callback Queue
+```
+
+Microtasks always have higher priority.
+
+---
+
+# 💻 Example 1
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Promise");
+});
+
+console.log("End");
+```
+
+Output:
+
+```
+Start
+End
+Promise
+Timer
+```
+
+---
+
+# Why?
+
+Step 1
+
+```
+Start
+```
+
+prints.
+
+---
+
+Step 2
+
+Timer callback goes to:
+
+```
+Callback Queue
+```
+
+---
+
+Step 3
+
+Promise callback goes to:
+
+```
+Microtask Queue
+```
+
+---
+
+Step 4
+
+```
+End
+```
+
+prints.
+
+Call Stack becomes empty.
+
+Event Loop checks:
+
+```
+Microtask Queue
+
+↓
+
+Promise
+```
+
+After all microtasks:
+
+```
+Callback Queue
+
+↓
+
+Timer
+```
+
+---
+
+# Execution Diagram
+
+```
+Call Stack
+
+↓
+
+Empty
+
+↓
+
+Microtask Queue
+
+↓
+
+Promise
+
+↓
+
+Callback Queue
+
+↓
+
+Timer
+```
+
+---
+
+# 💻 Example 2
+
+```javascript
+console.log("1");
+
+Promise.resolve().then(() => {
+    console.log("2");
+});
+
+Promise.resolve().then(() => {
+    console.log("3");
+});
+
+console.log("4");
+```
+
+Output:
+
+```
+1
+4
+2
+3
+```
+
+Both Promise callbacks are executed before any macrotask.
+
+---
+
+# 💻 Example 3
+
+```javascript
+setTimeout(() => {
+    console.log("Timer 1");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Promise 1");
+});
+
+setTimeout(() => {
+    console.log("Timer 2");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Promise 2");
+});
+```
+
+Output:
+
+```
+Promise 1
+Promise 2
+Timer 1
+Timer 2
+```
+
+Reason:
+
+```
+Microtask Queue
+
+↓
+
+Promise 1
+
+↓
+
+Promise 2
+
+↓
+
+Callback Queue
+
+↓
+
+Timer 1
+
+↓
+
+Timer 2
+```
+
+---
+
+# 🌍 Real Backend Example
+
+```javascript
+app.get("/users", async (req, res) => {
+
+    const users = await User.find();
+
+    res.json(users);
+
+});
+```
+
+When `User.find()` completes:
+
+```
+Promise resolves
+
+↓
+
+Microtask Queue
+
+↓
+
+Controller resumes
+
+↓
+
+Response sent
+```
+
+This is one reason why `async/await` feels so responsive.
+
+---
+
+# ⚠️ Common Mistakes
+
+## Mistake 1
+
+Thinking `setTimeout(..., 0)` has highest priority.
+
+Wrong.
+
+Promise callbacks run first.
+
+---
+
+## Mistake 2
+
+Thinking Event Loop executes one microtask and then one timer.
+
+Wrong.
+
+The Event Loop empties the **entire Microtask Queue** before executing the next macrotask.
+
+---
+
+# 🧠 Remember This Rule
+
+```
+Synchronous Code
+
+        ↓
+
+All Microtasks
+
+        ↓
+
+One Macrotask
+
+        ↓
+
+Repeat
+```
+
+This rule explains most JavaScript output questions.
+
+---
+
+# 📝 Summary
+
+- JavaScript has two important queues.
+- Callback Queue stores timer, I/O, and event callbacks.
+- Microtask Queue stores Promise callbacks.
+- Microtasks have higher priority than macrotasks.
+- The Event Loop empties the Microtask Queue before processing the Callback Queue.
+
+---
+
+# 🎤 Interview Questions
+
+1. What is the difference between the Callback Queue and the Microtask Queue?
+2. Which has higher priority: Promise or setTimeout?
+3. Why does `Promise.then()` execute before `setTimeout(..., 0)`?
+4. What kinds of tasks go into the Microtask Queue?
+5. Does the Event Loop process one microtask at a time or all of them?
