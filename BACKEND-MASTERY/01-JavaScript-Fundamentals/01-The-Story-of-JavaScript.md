@@ -8,7 +8,7 @@ prerequisites: "None"
 author: "Harsh Pandit (Notes) + ChatGPT"
 ---
 
-# 📖 Chapter 1 — The Story of JavaScript
+# 📖 Chapter 1 – The Story of JavaScript
 
 > *"Every programming language exists because someone had a problem to solve."*
 
@@ -16,18 +16,34 @@ author: "Harsh Pandit (Notes) + ChatGPT"
 
 # 📚 Table of Contents
 
-1. Introduction
-2. The Internet Before JavaScript
-3. The Problem
-4. Why JavaScript Was Created
-5. The Birth of JavaScript
-6. Why is it Called JavaScript?
-7. Evolution of JavaScript
-8. Browser Wars
-9. Node.js Revolution
-10. Summary
-11. Interview Questions
-12. Exercises
+- [🎯 Learning Objectives](#-learning-objectives)
+- [📌 Prerequisites](#-prerequisites)
+- [🌍 Introduction](#-introduction)
+- [🌐 The Internet Before JavaScript](#-the-internet-before-javascript)
+- [💡 What Does "Static" Mean?](#-what-does-static-mean)
+- [📦 How Websites Worked](#-how-websites-worked)
+- [🚨 The Problem](#-the-problem)
+- [💭 The Need for a New Language](#-the-need-for-a-new-language)
+- [🌐 The Web in 1995](#-the-web-in-1995)
+- [👨‍💻 Enter Brendan Eich](#-enter-brendan-eich)
+- [⏳ The 10-Day Challenge](#-the-10-day-challenge)
+- [📝 The First Name: Mocha](#-the-first-name-mocha)
+- [🔄 Second Name: LiveScript](#-second-name-livescript)
+- [☕ Why Did It Become JavaScript?](#-why-did-it-become-javascript)
+- [📊 Java vs JavaScript](#-java-vs-javascript)
+- [⚔️ The Browser Wars](#️-the-browser-wars)
+- [🏛 Enter ECMA International](#-enter-ecma-international)
+- [📘 What is ECMAScript?](#-what-is-ecmascript)
+- [🌟 Why ES6 Was Revolutionary](#-why-es6-was-revolutionary)
+- [🚀 The Birth of Node.js](#-the-birth-of-nodejs)
+- [📦 What Does Node.js Add?](#-what-does-nodejs-add)
+- [🌍 JavaScript Today](#-javascript-today)
+- [🧠 Chapter Mind Map](#-chapter-mind-map)
+- [📌 Key Takeaways](#-key-takeaways)
+- [🎯 Interview Corner](#-interview-corner)
+- [🛠 Practice Exercises](#-practice-exercises)
+- [📝 Chapter Summary](#-chapter-summary)
+- [📖 What's Next?](#-whats-next)
 
 ---
 
