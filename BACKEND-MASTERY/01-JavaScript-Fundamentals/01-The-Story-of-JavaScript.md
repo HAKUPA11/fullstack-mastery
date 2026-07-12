@@ -863,3 +863,534 @@ In **Part 3**, we'll explore:
 - Why every browser behaved differently
 - How JavaScript became an international standard
 - Why modern JavaScript is called ECMAScript
+---
+title: "Chapter 01 - The Story of JavaScript"
+part: "Part 3 - Browser Wars & The Birth of ECMAScript"
+module: "JavaScript Fundamentals"
+---
+
+# 📖 Part 3 — Browser Wars & The Birth of ECMAScript
+
+> *"A programming language becomes successful not only because it is useful, but because everyone agrees on how it should behave."*
+
+---
+
+# 📚 In This Part
+
+- Browser Wars
+- Internet Explorer vs Netscape
+- The Need for Standardization
+- Birth of ECMAScript
+- JavaScript vs ECMAScript
+- Evolution of JavaScript
+- Modern JavaScript
+
+---
+
+# 🌍 A New Problem Appears
+
+JavaScript was becoming popular.
+
+Developers loved it.
+
+Companies loved it.
+
+Users loved interactive websites.
+
+But there was a huge problem...
+
+There wasn't just **one browser** anymore.
+
+There were several.
+
+```
+                Internet
+                     │
+        ┌────────────┴────────────┐
+        │                         │
+        ▼                         ▼
+   Netscape Navigator      Internet Explorer
+```
+
+Every browser company wanted to dominate the web.
+
+This competition became known as:
+
+# ⚔️ The Browser Wars
+
+---
+
+# 🤔 Why Were Browser Wars a Problem?
+
+Imagine you're a web developer.
+
+You write this code:
+
+```javascript
+alert("Hello!");
+```
+
+It works perfectly in Browser A.
+
+But in Browser B...
+
+❌ It behaves differently.
+
+Or maybe it doesn't work at all.
+
+Developers constantly faced situations like:
+
+```
+Works in Netscape
+
+❌ Doesn't work in Internet Explorer
+
+Works in Internet Explorer
+
+❌ Doesn't work in Netscape
+```
+
+This was frustrating.
+
+---
+
+# 😨 The Developer's Nightmare
+
+Imagine building an online shopping website.
+
+You test it.
+
+Everything works.
+
+Then a customer opens it in another browser.
+
+Suddenly:
+
+- Buttons stop working.
+- Forms break.
+- Animations disappear.
+- Errors appear.
+
+Your code wasn't necessarily wrong.
+
+The browsers simply interpreted JavaScript differently.
+
+---
+
+# ⚠️ Why Did This Happen?
+
+Because there were **no official rules**.
+
+Each browser company implemented JavaScript in its own way.
+
+Think of it like two teachers grading the same exam with different answer keys.
+
+```
+Company A
+
+↓
+
+Own JavaScript Rules
+
+-------------------------
+
+Company B
+
+↓
+
+Different JavaScript Rules
+```
+
+Without common rules, developers suffered.
+
+---
+
+# 📖 The Need for Standardization
+
+The web community realized something important.
+
+> **"If every browser behaves differently, web development will become impossible."**
+
+They needed a common rulebook.
+
+Something every browser company would follow.
+
+---
+
+# 🏛 Enter ECMA International
+
+An organization called **ECMA International** stepped in.
+
+Their job was to create standards for technology.
+
+Instead of letting every company invent its own version of JavaScript, ECMA created an official specification.
+
+This specification was called:
+
+# ECMAScript
+
+---
+
+# 📘 What is ECMAScript?
+
+Many beginners think:
+
+> JavaScript = ECMAScript
+
+Not exactly.
+
+Let's understand the difference.
+
+Imagine you're building a house.
+
+You first create:
+
+- A blueprint
+- Construction rules
+- Measurements
+
+That blueprint tells everyone exactly how the house should be built.
+
+ECMAScript is that blueprint.
+
+JavaScript is the actual house.
+
+---
+
+# 🧠 Memory Trick
+
+Remember this simple analogy:
+
+```
+ECMAScript
+
+↓
+
+Rulebook
+
+↓
+
+JavaScript Engine
+
+↓
+
+JavaScript
+```
+
+Or even simpler:
+
+```
+ECMAScript = Specification
+
+JavaScript = Implementation
+```
+
+---
+
+# 📦 Real-Life Analogy
+
+Suppose the government says:
+
+> "Every traffic signal must have:
+
+- Red
+- Yellow
+- Green"
+
+This is the rule.
+
+Different companies manufacture traffic lights.
+
+Some are bigger.
+
+Some are smaller.
+
+Some use LED lights.
+
+Some use LCD displays.
+
+But every traffic light follows the same standard.
+
+Similarly,
+
+ECMAScript defines the rules.
+
+Different JavaScript engines implement those rules.
+
+---
+
+# 🌐 Different Engines, Same Language
+
+Today we have multiple JavaScript engines.
+
+```
+             ECMAScript
+                  │
+     ┌────────────┼────────────┐
+     ▼            ▼            ▼
+     V8      SpiderMonkey   JavaScriptCore
+     │            │            │
+ Chrome      Firefox       Safari
+```
+
+Different implementations.
+
+Same specification.
+
+---
+
+# 📜 The First ECMAScript Standard
+
+In 1997,
+
+ECMA released the first official version.
+
+```
+1997
+
+↓
+
+ECMAScript 1 (ES1)
+```
+
+For the first time,
+
+browser companies had an agreed set of rules.
+
+This made JavaScript far more reliable across browsers.
+
+---
+
+# 🚀 JavaScript Continues to Evolve
+
+Over the years, ECMAScript introduced many new features.
+
+Some important milestones:
+
+| Year | Version | Major Features |
+|------|----------|----------------|
+| 1997 | ES1 | First Standard |
+| 1998 | ES2 | Minor Improvements |
+| 1999 | ES3 | Regular Expressions, Better Strings |
+| 2009 | ES5 | Strict Mode, JSON Support |
+| 2015 | ES6 / ES2015 | let, const, Classes, Arrow Functions, Promises |
+| 2016+ | ES2016 onwards | New features released every year |
+
+---
+
+# 🌟 Why ES6 Was Revolutionary
+
+Many developers consider ES6 one of the biggest updates in JavaScript history.
+
+It introduced features that we now use every day.
+
+Examples:
+
+```javascript
+const name = "Harsh";
+
+let age = 21;
+```
+
+Arrow Functions:
+
+```javascript
+const square = x => x * x;
+```
+
+Classes:
+
+```javascript
+class Student {
+
+}
+```
+
+Promises:
+
+```javascript
+fetch("/users")
+```
+
+We'll study every one of these later.
+
+---
+
+# 🤔 Why Is It Called ES6 and ES2015?
+
+Good question.
+
+Originally,
+
+versions were named:
+
+```
+ES1
+
+↓
+
+ES2
+
+↓
+
+ES3
+
+↓
+
+ES5
+
+↓
+
+ES6
+```
+
+After ES6,
+
+the committee decided to release updates every year.
+
+Instead of saying ES7,
+
+they started using the year.
+
+Example:
+
+```
+ES2015
+
+ES2016
+
+ES2017
+
+ES2018
+```
+
+ES6 and ES2015 refer to the same release.
+
+---
+
+# 💡 Did You Know?
+
+Modern JavaScript doesn't stop evolving.
+
+Every year,
+
+new features are proposed, discussed, tested, and eventually added to the ECMAScript standard.
+
+This is why JavaScript continues to improve without breaking older code.
+
+---
+
+# ⚠️ Common Misconception
+
+Many beginners say:
+
+> "I am learning ECMAScript."
+
+Technically,
+
+you're learning **JavaScript**.
+
+ECMAScript is the specification that JavaScript follows.
+
+---
+
+# 📌 Summary (Part 3)
+
+In this part, we learned:
+
+- Browser companies implemented JavaScript differently.
+- This caused compatibility problems.
+- ECMA International created a standard.
+- The standard is called ECMAScript.
+- JavaScript is an implementation of ECMAScript.
+- Modern JavaScript continues to evolve through new ECMAScript releases.
+
+---
+
+# 🧠 Quick Revision
+
+```
+JavaScript Created
+
+↓
+
+Browser Wars
+
+↓
+
+Different Implementations
+
+↓
+
+Need for Rules
+
+↓
+
+ECMAScript
+
+↓
+
+Modern JavaScript
+```
+
+---
+
+# 🎯 Interview Questions
+
+### 1. What were the Browser Wars?
+
+<details>
+<summary>Answer</summary>
+
+The Browser Wars were a period when browser companies such as Netscape and Microsoft competed aggressively, often implementing JavaScript differently, leading to compatibility issues.
+
+</details>
+
+---
+
+### 2. Why was ECMAScript created?
+
+<details>
+<summary>Answer</summary>
+
+To standardize JavaScript so that different browsers would behave consistently and developers could write portable code.
+
+</details>
+
+---
+
+### 3. What is the difference between JavaScript and ECMAScript?
+
+<details>
+<summary>Answer</summary>
+
+ECMAScript is the official specification (rulebook). JavaScript is an implementation of that specification.
+
+</details>
+
+---
+
+### 4. What happened in ES6?
+
+<details>
+<summary>Answer</summary>
+
+ES6 (ES2015) introduced major features such as let, const, arrow functions, classes, template literals, promises, modules, and more.
+
+</details>
+
+---
+
+# 🚀 Coming Up Next
+
+In **Part 4 (Final Part)** we'll complete Chapter 1 by exploring:
+
+- The rise of Node.js
+- JavaScript beyond the browser
+- Why JavaScript became the most popular programming language
+- Modern JavaScript ecosystem
+- Complete chapter revision
+- Mind map
+- Final interview questions
+- Practice exercises
+- Chapter conclusion
