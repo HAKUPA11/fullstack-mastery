@@ -3221,3 +3221,667 @@ Because `.then()` callbacks go to the microtask queue.
 5. Are Promises synchronous or asynchronous?
 6. When does a Promise callback execute?
 7. Does creating a Promise start execution immediately?
+
+# Part 7 — Async/Await: Modern Asynchronous JavaScript
+
+---
+
+# 📑 Topics Covered
+
+- Why Async/Await was introduced
+- What is async?
+- What is await?
+- Basic Async/Await syntax
+- Async functions always return Promises
+- Error handling with try/catch
+- Multiple await operations
+- Parallel execution with Promise.all()
+- Real backend examples
+
+---
+
+# 🤔 Why Async/Await?
+
+Before async/await:
+
+```javascript
+getUser()
+
+.then(user=>{
+
+    return getOrders(user);
+
+})
+
+.then(orders=>{
+
+    return getPayment(orders);
+
+})
+
+.then(payment=>{
+
+    console.log(payment);
+
+});
+```
+
+This works, but long chains become harder to read.
+
+---
+
+With async/await:
+
+```javascript
+const user = await getUser();
+
+const orders = await getOrders(user);
+
+const payment = await getPayment(orders);
+```
+
+It looks like normal synchronous code.
+
+---
+
+# 📖 What is async?
+
+The `async` keyword is used before a function.
+
+Example:
+
+```javascript
+async function greet(){
+
+    return "Hello";
+
+}
+```
+
+An async function always returns a Promise.
+
+---
+
+## Normal Function
+
+```javascript
+function test(){
+
+    return "Hello";
+
+}
+```
+
+Returns:
+
+```
+Hello
+```
+
+---
+
+## Async Function
+
+```javascript
+async function test(){
+
+    return "Hello";
+
+}
+```
+
+Returns:
+
+```
+Promise { "Hello" }
+```
+
+---
+
+# 💻 Example
+
+```javascript
+async function message(){
+
+    return "Welcome";
+
+}
+
+
+message()
+
+.then(result=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```
+Welcome
+```
+
+Internally:
+
+```javascript
+return "Welcome";
+```
+
+becomes:
+
+```javascript
+return Promise.resolve("Welcome");
+```
+
+---
+
+# 📖 What is await?
+
+`await` is used to wait for a Promise to complete.
+
+Example:
+
+```javascript
+async function getData(){
+
+    let result = await fetchData();
+
+    console.log(result);
+
+}
+```
+
+Meaning:
+
+```
+Start Promise
+
+↓
+
+Wait for result
+
+↓
+
+Continue execution
+```
+
+---
+
+# Important Rule
+
+`await` can only be used inside an `async` function.
+
+Correct:
+
+```javascript
+async function run(){
+
+    await something();
+
+}
+```
+
+Incorrect:
+
+```javascript
+await something();
+```
+
+---
+
+# 💻 Basic Async/Await Example
+
+```javascript
+function download(){
+
+    return new Promise(resolve=>{
+
+        setTimeout(()=>{
+
+            resolve("File downloaded");
+
+        },2000);
+
+    });
+
+}
+
+
+async function process(){
+
+    let result = await download();
+
+    console.log(result);
+
+}
+
+
+process();
+```
+
+Output:
+
+```
+(wait 2 seconds)
+
+File downloaded
+```
+
+---
+
+# Internal Flow
+
+Code:
+
+```javascript
+let result = await download();
+```
+
+Flow:
+
+```
+Call async function
+
+        ↓
+
+Start Promise
+
+        ↓
+
+Pause async function
+
+        ↓
+
+Promise completes
+
+        ↓
+
+Resume function
+
+        ↓
+
+Continue execution
+```
+
+Important:
+
+`await` does NOT block the entire JavaScript thread.
+
+It only pauses that async function.
+
+---
+
+# Async/Await vs Blocking
+
+Many beginners confuse:
+
+```javascript
+await databaseQuery();
+```
+
+with:
+
+```
+JavaScript stops completely
+```
+
+Wrong ❌
+
+Actual:
+
+```
+Current async function pauses
+
+        ↓
+
+Event Loop continues working
+
+        ↓
+
+Other requests execute
+
+        ↓
+
+Promise completes
+
+        ↓
+
+Function resumes
+```
+
+---
+
+# Error Handling
+
+Promises use:
+
+```javascript
+.catch()
+```
+
+Async/await uses:
+
+```javascript
+try/catch
+```
+
+---
+
+# Promise Style
+
+```javascript
+fetchData()
+
+.then(data=>{
+
+    console.log(data);
+
+})
+
+.catch(error=>{
+
+    console.log(error);
+
+});
+```
+
+---
+
+# Async/Await Style
+
+```javascript
+async function getData(){
+
+    try{
+
+        let data = await fetchData();
+
+        console.log(data);
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+```
+
+Cleaner.
+
+---
+
+# 💻 Real Example — API Request
+
+```javascript
+async function getUsers(){
+
+    try{
+
+        let response = await fetch(
+            "https://api.example.com/users"
+        );
+
+
+        let users = await response.json();
+
+
+        console.log(users);
+
+    }
+
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+getUsers();
+```
+
+Flow:
+
+```
+Send Request
+
+↓
+
+Wait for Response
+
+↓
+
+Convert JSON
+
+↓
+
+Use Data
+```
+
+---
+
+# 💻 Backend Example — Database
+
+Express controller:
+
+```javascript
+app.get("/users", async(req,res)=>{
+
+    try{
+
+        const users = await User.find();
+
+        res.json(users);
+
+    }
+
+    catch(error){
+
+        res.status(500)
+        .json({
+            message:"Server Error"
+        });
+
+    }
+
+});
+```
+
+This pattern is used in real applications.
+
+---
+
+# ⚠️ Multiple Await Operations
+
+Example:
+
+```javascript
+async function dashboard(){
+
+    const user = await getUser();
+
+    const posts = await getPosts();
+
+    const notifications = await getNotifications();
+
+}
+```
+
+Execution:
+
+```
+getUser()
+
+↓
+
+wait
+
+↓
+
+getPosts()
+
+↓
+
+wait
+
+↓
+
+getNotifications()
+```
+
+Total time:
+
+```
+5 sec + 5 sec + 5 sec
+
+= 15 seconds
+```
+
+Sometimes this is inefficient.
+
+---
+
+# 🚀 Running Promises Together
+
+Use:
+
+```javascript
+Promise.all()
+```
+
+Example:
+
+```javascript
+async function dashboard(){
+
+    const [
+        user,
+        posts,
+        notifications
+    ] = await Promise.all([
+
+        getUser(),
+
+        getPosts(),
+
+        getNotifications()
+
+    ]);
+
+}
+```
+
+Now:
+
+```
+getUser()
+getPosts()
+getNotifications()
+
+run together
+```
+
+Time:
+
+```
+Maximum task time
+```
+
+Not:
+
+```
+Sum of all times
+```
+
+---
+
+# Async/Await vs Promise
+
+| Promise | Async/Await |
+|-|-|
+| Uses `.then()` | Uses `await` |
+| More chaining | Looks synchronous |
+| Error with `.catch()` | Error with try/catch |
+| Older style | Modern style |
+
+---
+
+# Common Mistakes
+
+## Mistake 1
+
+Using await outside async function.
+
+Wrong:
+
+```javascript
+let data = await fetchData();
+```
+
+---
+
+## Mistake 2
+
+Using await unnecessarily.
+
+Example:
+
+```javascript
+const x = await 10;
+```
+
+No Promise exists.
+
+---
+
+## Mistake 3
+
+Sequential awaits when parallel execution is possible.
+
+Bad:
+
+```javascript
+await task1();
+
+await task2();
+```
+
+Better:
+
+```javascript
+await Promise.all([
+task1(),
+task2()
+]);
+```
+
+---
+
+# 📝 Summary
+
+- `async` makes a function return a Promise.
+- `await` waits for a Promise result.
+- Await pauses only the async function, not JavaScript completely.
+- Async/await improves readability.
+- try/catch handles errors.
+- Promise.all() helps execute independent tasks together.
+- Async/await is the standard style in modern Node.js.
+
+---
+
+# 🎤 Interview Questions
+
+1. What does async keyword do?
+2. Does every async function return a Promise?
+3. What does await do internally?
+4. Does await block the JavaScript thread?
+5. Difference between Promise and async/await?
+6. How do you handle errors in async/await?
+7. When should you use Promise.all() with async/await?
