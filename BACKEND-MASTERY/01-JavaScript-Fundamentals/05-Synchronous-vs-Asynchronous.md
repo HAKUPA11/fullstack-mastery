@@ -1,28 +1,121 @@
 # Synchronous vs Asynchronous JavaScript
 
 ---
-
 # 📑 Table of Contents
 
 - [Learning Objectives](#learning-objectives)
 - [Prerequisites](#prerequisites)
+
+## Understanding Synchronous Programming
+
 - [Understanding Program Execution](#understanding-program-execution)
-- [Synchronous Programming](#synchronous-programming)
-- [Blocking Behaviour](#blocking-behaviour)
-- [Need for Asynchronous Programming](#need-for-asynchronous-programming)
-- [Asynchronous Programming](#asynchronous-programming)
-- [JavaScript Runtime Role](#javascript-runtime-role)
-- [Callbacks](#callbacks)
-- [setTimeout Internal Working](#settimeout-internal-working)
-- [Callback Queue](#callback-queue)
-- [Event Loop Introduction](#event-loop-introduction)
-- [Real World Examples](#real-world-examples)
-- [File System Example](#file-system-example)
-- [API Request Example](#api-request-example)
-- [Database Example](#database-example)
-- [Synchronous vs Asynchronous Comparison](#synchronous-vs-asynchronous-comparison)
+- [What is Synchronous Programming?](#what-is-synchronous-programming)
+- [Synchronous Execution Flow](#synchronous-execution-flow)
+- [Basic Synchronous Examples](#basic-synchronous-examples)
+- [Synchronous Execution Inside the Call Stack](#synchronous-execution-inside-the-call-stack)
+- [Characteristics of Synchronous Programming](#characteristics-of-synchronous-programming)
+- [Where is Synchronous Programming Useful?](#where-is-synchronous-programming-useful)
+- [Limitations of Synchronous Programming](#limitations-of-synchronous-programming)
+- [The Blocking Problem](#the-blocking-problem)
+
+---
+
+## Introduction to Asynchronous Programming
+
+- [Slow Operations in Real Applications](#slow-operations-in-real-applications)
+- [Why Waiting is a Problem](#why-waiting-is-a-problem)
+- [Introduction to Asynchronous Programming](#introduction-to-asynchronous-programming)
+- [Basic Asynchronous Example](#basic-asynchronous-example)
+- [Asynchronous vs Synchronous Programming](#asynchronous-vs-synchronous-programming)
+
+---
+
+## JavaScript Runtime
+
+- [JavaScript Engine vs JavaScript Runtime](#javascript-engine-vs-javascript-runtime)
+- [Role of the Runtime Environment](#role-of-the-runtime-environment)
+- [Runtime APIs](#runtime-apis)
+- [Runtime Architecture](#runtime-architecture)
+
+---
+
+## Callback Functions
+
+- [What is a Callback Function?](#what-is-a-callback-function)
+- [Synchronous Callback Example](#synchronous-callback-example)
+- [Asynchronous Callback Example](#asynchronous-callback-example)
+- [Callbacks in Node.js](#callbacks-in-nodejs)
+- [Callback Hell](#callback-hell)
+- [Problems with Callback Hell](#problems-with-callback-hell)
+
+---
+
+## Promises
+
+- [Why Promises Were Introduced](#why-promises-were-introduced)
+- [What is a Promise?](#what-is-a-promise)
+- [Promise States](#promise-states)
+- [Creating a Promise](#creating-a-promise)
+- [Consuming a Promise](#consuming-a-promise)
+- [Promise Chaining](#promise-chaining)
+- [Returning Values from then()](#returning-values-from-then)
+- [Promise Error Handling](#promise-error-handling)
+- [Promise.all()](#promiseall)
+- [Promise.allSettled()](#promiseallsettled)
+- [Promise.race()](#promiserace)
+- [Promise Methods Comparison](#promise-methods-comparison)
+
+---
+
+## Async/Await
+
+- [Why Async/Await?](#why-asyncawait)
+- [What is async?](#what-is-async)
+- [What is await?](#what-is-await)
+- [Basic Async/Await Example](#basic-asyncawait-example)
+- [Error Handling with try...catch](#error-handling-with-trycatch)
+- [Sequential vs Parallel Await](#sequential-vs-parallel-await)
+- [Using Promise.all() with Async/Await](#using-promiseall-with-asyncawait)
+- [Async/Await vs Promises](#asyncawait-vs-promises)
+
+---
+
+## Event Loop
+
+- [What is the Event Loop?](#what-is-the-event-loop)
+- [Why Do We Need the Event Loop?](#why-do-we-need-the-event-loop)
+- [Components Involved](#components-involved)
+- [How the Event Loop Works](#how-the-event-loop-works)
+- [Step-by-Step Execution](#step-by-step-execution)
+- [Common Event Loop Examples](#common-event-loop-examples)
+
+---
+
+## Microtask Queue vs Callback Queue
+
+- [What is a Queue?](#what-is-a-queue)
+- [Callback Queue (Macrotask Queue)](#callback-queue-macrotask-queue)
+- [Microtask Queue](#microtask-queue)
+- [Priority of Queues](#priority-of-queues)
+- [Promise vs setTimeout](#promise-vs-settimeout)
+- [Execution Flow](#execution-flow)
+
+---
+
+## Common Misconceptions
+
 - [Common Misconceptions](#common-misconceptions)
+
+---
+
+## Summary
+
 - [Summary](#summary)
+
+---
+
+## Interview Preparation
+
 - [Interview Questions](#interview-questions)
 - [Practice Exercises](#practice-exercises)
 
