@@ -3885,3 +3885,438 @@ task2()
 5. Difference between Promise and async/await?
 6. How do you handle errors in async/await?
 7. When should you use Promise.all() with async/await?
+# Part 8 — Event Loop
+
+---
+
+# 📑 Topics Covered
+
+- What is the Event Loop?
+- Why Do We Need an Event Loop?
+- Components Involved
+- How the Event Loop Works
+- Step-by-Step Execution
+- Common Examples
+- Common Misconceptions
+
+---
+
+# 🤔 What is the Event Loop?
+
+The **Event Loop** is a mechanism that continuously checks whether the **Call Stack** is empty.
+
+If the Call Stack is empty, it moves ready callbacks from the queue to the Call Stack for execution.
+
+Simple definition:
+
+> The Event Loop coordinates asynchronous tasks with the JavaScript Call Stack.
+
+---
+
+# 🧠 Why Do We Need an Event Loop?
+
+Suppose we write:
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Timer");
+}, 2000);
+
+console.log("End");
+```
+
+Question:
+
+After 2 seconds,
+
+**who tells JavaScript to execute the callback?**
+
+Answer:
+
+**The Event Loop.**
+
+Without the Event Loop, completed asynchronous tasks would never execute.
+
+---
+
+# 🏗️ Components Involved
+
+```
+                JavaScript Code
+                        │
+                        ▼
+                 Call Stack
+                        │
+──────────────────────────────────
+                Runtime APIs
+                        │
+                        ▼
+                Callback Queue
+                        │
+                        ▼
+                  Event Loop
+                        │
+                        ▼
+                 Call Stack
+```
+
+---
+
+# ⚙️ How Does the Event Loop Work?
+
+The Event Loop follows one simple rule:
+
+```
+IF Call Stack is Empty
+
+↓
+
+Take first callback from Queue
+
+↓
+
+Push it into Call Stack
+
+↓
+
+Execute it
+```
+
+Then it repeats forever.
+
+---
+
+# 💻 Example 1
+
+```javascript
+console.log("A");
+
+setTimeout(() => {
+    console.log("B");
+}, 1000);
+
+console.log("C");
+```
+
+Output:
+
+```
+A
+C
+B
+```
+
+---
+
+## Step-by-Step Execution
+
+### Step 1
+
+```
+Call Stack
+
+↓
+
+console.log("A")
+```
+
+Output:
+
+```
+A
+```
+
+---
+
+### Step 2
+
+```
+setTimeout()
+
+↓
+
+Timer API
+```
+
+Timer starts.
+
+Callback is **not** executed immediately.
+
+---
+
+### Step 3
+
+```
+console.log("C")
+```
+
+Output:
+
+```
+C
+```
+
+---
+
+### Step 4
+
+After 1 second:
+
+```
+Callback Queue
+
+↓
+
+console.log("B")
+```
+
+---
+
+### Step 5
+
+Event Loop checks:
+
+```
+Is Call Stack Empty?
+
+YES
+```
+
+Move callback:
+
+```
+Callback Queue
+
+↓
+
+Call Stack
+
+↓
+
+console.log("B")
+```
+
+Output:
+
+```
+B
+```
+
+---
+
+# 💻 Example 2
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+    console.log("One");
+}, 2000);
+
+setTimeout(() => {
+    console.log("Two");
+}, 1000);
+
+console.log("End");
+```
+
+Output:
+
+```
+Start
+End
+Two
+One
+```
+
+The callback that becomes ready first executes first.
+
+---
+
+# 💻 Example 3
+
+```javascript
+console.log("1");
+
+setTimeout(() => {
+    console.log("2");
+}, 0);
+
+console.log("3");
+```
+
+Output:
+
+```
+1
+3
+2
+```
+
+Even though the delay is `0`, the callback still waits until:
+
+- Current code finishes.
+- Call Stack becomes empty.
+
+---
+
+# Visual Execution
+
+```
+Code Starts
+
+↓
+
+Call Stack Executes
+
+↓
+
+setTimeout → Runtime
+
+↓
+
+Remaining Code Executes
+
+↓
+
+Timer Completes
+
+↓
+
+Callback Queue
+
+↓
+
+Event Loop
+
+↓
+
+Call Stack
+
+↓
+
+Callback Executes
+```
+
+---
+
+# 🌍 Real World Analogy
+
+Imagine a restaurant.
+
+- **Chef** → Runtime
+- **Waiter** → Event Loop
+- **Customers** → Callback Queue
+- **Kitchen Counter** → Call Stack
+
+Flow:
+
+```
+Customer places order
+
+↓
+
+Chef prepares food
+
+↓
+
+Food Ready
+
+↓
+
+Waiter checks counter
+
+↓
+
+Counter Empty?
+
+↓
+
+Serve Food
+```
+
+The waiter never interrupts someone already being served.
+
+---
+
+# ⚠️ Important Rules
+
+## Rule 1
+
+The Event Loop **never interrupts** the Call Stack.
+
+It waits until the stack is empty.
+
+---
+
+## Rule 2
+
+The Event Loop does **not execute** callbacks.
+
+It only moves them to the Call Stack.
+
+The JavaScript Engine executes them.
+
+---
+
+## Rule 3
+
+A completed timer doesn't run immediately.
+
+It waits until:
+
+- Timer completes.
+- Call Stack is empty.
+
+---
+
+# ❌ Common Misconceptions
+
+### "setTimeout(fn, 0) executes immediately."
+
+Wrong.
+
+It executes **after the current synchronous code finishes**.
+
+---
+
+### "Event Loop executes JavaScript."
+
+Wrong.
+
+The Event Loop only schedules execution.
+
+The JavaScript Engine executes the code.
+
+---
+
+### "The Event Loop waits for timers."
+
+Wrong.
+
+The Runtime manages timers.
+
+The Event Loop only checks whether callbacks are ready to run.
+
+---
+
+# 📝 Summary
+
+- The Event Loop coordinates asynchronous execution.
+- It continuously checks whether the Call Stack is empty.
+- It moves ready callbacks from the queue to the Call Stack.
+- It never interrupts running JavaScript code.
+- It is one of the core mechanisms behind JavaScript's asynchronous behavior.
+
+---
+
+# 🎤 Interview Questions
+
+1. What is the Event Loop?
+2. Why is the Event Loop needed?
+3. Does the Event Loop execute JavaScript?
+4. Why does `setTimeout(fn, 0)` execute later?
+5. Can the Event Loop interrupt synchronous code?
+6. What happens after a timer finishes?
