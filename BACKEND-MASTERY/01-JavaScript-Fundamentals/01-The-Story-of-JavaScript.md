@@ -404,3 +404,462 @@ In **Part 2**, we'll learn:
 - Why the name changed to **LiveScript**
 - Why it finally became **JavaScript**
 - Why JavaScript and Java are completely different languages
+
+
+---
+
+title: "Chapter 01 - The Story of JavaScript"
+part: "Part 2 - The Birth of JavaScript"
+module: "JavaScript Fundamentals"
+
+---
+
+# 📖 Part 2 — The Birth of JavaScript
+
+> *"Some technologies change the world because they are perfect. JavaScript changed the world despite being created in just 10 days."*
+
+---
+
+# 📚 In This Part
+
+- The Rise of Netscape
+- The Browser Wars
+- Who is Brendan Eich?
+- Why JavaScript was created in only 10 days
+- Mocha → LiveScript → JavaScript
+- JavaScript vs Java
+- Why JavaScript became so popular
+
+---
+
+# 🌐 The Web in 1995
+
+By the mid-1990s, the Internet was growing at an incredible pace.
+
+Millions of people had started using web browsers.
+
+At that time, one browser dominated the market:
+
+## 🖥 Netscape Navigator
+
+Netscape Navigator was the most popular web browser in the world.
+
+Think of it as the **Google Chrome of the 1990s**.
+
+```
+                 Internet
+                      │
+                      ▼
+            Netscape Navigator
+            (Most Popular Browser)
+```
+
+People used Netscape to:
+
+- Read websites
+- Download files
+- Browse the Internet
+- Access online services
+
+But Netscape had one major problem.
+
+Its webpages were still **static**.
+
+---
+
+# ❓ Netscape's Big Challenge
+
+Netscape wanted to make websites interactive.
+
+They wanted users to be able to:
+
+- Click buttons
+- Validate forms
+- Show popups
+- Create animations
+- Perform calculations
+
+Without contacting the server every time.
+
+To achieve this, they needed a programming language that could run directly inside the browser.
+
+---
+
+# 👨‍💻 Enter Brendan Eich
+
+In 1995, Netscape hired an engineer named:
+
+# Brendan Eich
+
+He was a talented programmer with a strong background in computer science.
+
+Netscape gave him a difficult task:
+
+> **"Create a scripting language for our browser."**
+
+And here's the unbelievable part...
+
+---
+
+# ⏳ The 10-Day Challenge
+
+Brendan Eich had only:
+
+# **10 DAYS**
+
+to design and implement the first version of JavaScript.
+
+Yes.
+
+Only ten days.
+
+```
+Day 1 → Language Design
+
+↓
+
+Day 2 → Parser
+
+↓
+
+Day 3 → Variables
+
+↓
+
+Day 4 → Functions
+
+↓
+
+...
+
+↓
+
+Day 10 → First Working Version
+```
+
+Imagine creating a programming language in less than two weeks.
+
+Because of this extremely short timeline, some design decisions were made quickly—and a few quirks still exist in JavaScript today.
+
+---
+
+# 💡 Did You Know?
+
+Many of JavaScript's unusual behaviors exist because Brendan Eich had to finish the language under an incredibly tight deadline.
+
+Some examples (don't worry if these don't make sense yet):
+
+```javascript
+[] + []
+```
+
+Output:
+
+```text
+""
+```
+
+---
+
+```javascript
+[] == false
+```
+
+Output:
+
+```text
+true
+```
+
+---
+
+```javascript
+typeof null
+```
+
+Output:
+
+```text
+object
+```
+
+These are famous JavaScript quirks that we'll understand later in the course.
+
+---
+
+# 📝 The First Name: Mocha
+
+The language was **not** originally called JavaScript.
+
+Its first name was:
+
+# Mocha
+
+```
+1995
+
+↓
+
+Mocha
+```
+
+This was the internal project name during development.
+
+---
+
+# 🔄 Second Name: LiveScript
+
+Before its public release, Netscape renamed it to:
+
+# LiveScript
+
+```
+Mocha
+
+↓
+
+LiveScript
+```
+
+The idea was to highlight that webpages could now become "live" and interactive.
+
+---
+
+# ☕ Why Did It Become JavaScript?
+
+Around the same time, another programming language was becoming extremely popular:
+
+# Java
+
+Java was developed by Sun Microsystems and was receiving enormous attention in the software industry.
+
+Netscape wanted to benefit from Java's popularity.
+
+So they renamed:
+
+```
+LiveScript
+
+↓
+
+JavaScript
+```
+
+This was primarily a **marketing decision**.
+
+---
+
+# ⚠️ Common Misconception
+
+Many beginners believe:
+
+> **JavaScript is a simpler version of Java.**
+
+❌ This is incorrect.
+
+JavaScript and Java are completely different programming languages.
+
+They have different:
+
+- Syntax
+- Runtime
+- Compilers
+- Use Cases
+- Design Philosophy
+
+The only similarity is part of the name.
+
+---
+
+# 📊 Java vs JavaScript
+
+| Java | JavaScript |
+|-------|------------|
+| Created by Sun Microsystems | Created at Netscape |
+| Compiled Language | Interpreted/JIT-compiled Language |
+| Runs on the JVM | Runs in JavaScript Engines (V8, SpiderMonkey, JavaScriptCore) |
+| Statically Typed | Dynamically Typed |
+| Used for Enterprise, Android, Backend | Used for Web, Backend, Mobile, Desktop, IoT |
+
+---
+
+# 🤔 Then Why Didn't They Change the Name Later?
+
+Good question.
+
+By the time people realized the name caused confusion...
+
+JavaScript had already become extremely popular.
+
+Changing its name would have broken documentation, books, developer expectations, and the web ecosystem.
+
+So the name remained.
+
+Even today, millions of beginners confuse Java and JavaScript.
+
+---
+
+# 🌍 Why Developers Loved JavaScript
+
+JavaScript solved several major problems.
+
+Before JavaScript:
+
+```
+User Clicks Button
+
+↓
+
+Server
+
+↓
+
+Response
+
+↓
+
+Reload Page
+```
+
+After JavaScript:
+
+```
+User Clicks Button
+
+↓
+
+JavaScript Executes
+
+↓
+
+Instant Response
+```
+
+This dramatically improved user experience.
+
+Websites suddenly felt much faster and more interactive.
+
+---
+
+# 🧠 Memory Trick
+
+Remember the naming history like this:
+
+```
+Mocha
+
+↓
+
+LiveScript
+
+↓
+
+JavaScript
+```
+
+And remember:
+
+> **The name changed. The purpose didn't.**
+
+Its goal was always the same:
+
+> **Make web pages interactive.**
+
+---
+
+# 📦 Timeline
+
+```
+1993
+│
+├── Mosaic Browser becomes popular
+│
+1994
+│
+├── Netscape Navigator released
+│
+1995
+│
+├── Brendan Eich joins Netscape
+│
+├── JavaScript created in 10 days
+│
+├── Mocha
+│
+├── LiveScript
+│
+└── JavaScript released
+```
+
+---
+
+# 📝 Summary (Part 2)
+
+In this part, we learned:
+
+- Netscape wanted interactive webpages.
+- Brendan Eich created the first version of JavaScript.
+- The language was built in only 10 days.
+- It was first called Mocha.
+- Then renamed to LiveScript.
+- Finally renamed to JavaScript for marketing reasons.
+- JavaScript and Java are completely different languages.
+
+---
+
+# 🎯 Interview Questions
+
+### 1. Who created JavaScript?
+
+<details>
+<summary>Answer</summary>
+
+Brendan Eich created JavaScript at Netscape in 1995.
+
+</details>
+
+---
+
+### 2. How long did it take to create JavaScript?
+
+<details>
+<summary>Answer</summary>
+
+The first version was created in approximately 10 days.
+
+</details>
+
+---
+
+### 3. What were JavaScript's previous names?
+
+<details>
+<summary>Answer</summary>
+
+Mocha → LiveScript → JavaScript
+
+</details>
+
+---
+
+### 4. Is JavaScript related to Java?
+
+<details>
+<summary>Answer</summary>
+
+No. They are different languages with different runtimes, syntax, and purposes. The similar names are the result of a marketing decision.
+
+</details>
+
+---
+
+# 🚀 Coming Up Next
+
+In **Part 3**, we'll explore:
+
+- Browser Wars
+- Microsoft's Internet Explorer
+- Standardization (ECMAScript)
+- Why every browser behaved differently
+- How JavaScript became an international standard
+- Why modern JavaScript is called ECMAScript
