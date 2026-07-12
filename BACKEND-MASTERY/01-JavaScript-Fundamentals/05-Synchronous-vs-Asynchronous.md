@@ -2564,5 +2564,660 @@ Promise callback runs later
 4. Difference between callbacks and Promises?
 5. Does Promise create a new thread?
 6. What is the difference between resolve and reject?
+# Part 6 — Promises in Depth
+
+---
+
+# 📑 Topics Covered
+
+- Promise Chaining
+- Returning Values from Promises
+- Error Handling
+- Multiple Promises
+- Promise.all()
+- Promise.race()
+- Promise.allSettled()
+- Real World API Example
+
+---
+
+# 🔗 Promise Chaining
+
+Promise chaining allows us to execute multiple asynchronous operations one after another.
+
+Instead of:
+
+```javascript
+function1(function(){
+
+    function2(function(){
+
+        function3();
+
+    });
+
+});
+```
+
+We write:
+
+```javascript
+function1()
+
+.then(function2)
+
+.then(function3);
+```
+
+Cleaner and easier to maintain.
+
+---
+
+# 💻 Example 1 — Basic Promise Chain
+
+```javascript
+Promise.resolve(10)
+
+.then((value)=>{
+
+    console.log(value);
+
+    return value * 2;
+
+})
+
+.then((value)=>{
+
+    console.log(value);
+
+    return value * 3;
+
+})
+
+.then((value)=>{
+
+    console.log(value);
+
+});
+```
+
+Output:
+
+```
+10
+20
+60
+```
+
+---
+
+# How Does This Work?
+
+First:
+
+```javascript
+Promise.resolve(10)
+```
+
+creates:
+
+```
+Promise
+
+↓
+
+Resolved with 10
+```
+
+Then:
+
+```javascript
+return value * 2;
+```
+
+creates a new Promise automatically.
+
+Flow:
+
+```
+Promise 1
+
+↓
+
+Promise 2
+
+↓
+
+Promise 3
+```
+
+---
+
+# Important Rule
+
+Whatever we return from `.then()` goes to the next `.then()`.
+
+Example:
+
+```javascript
+Promise.resolve("Hello")
+
+.then((data)=>{
+
+    return data + " World";
+
+})
+
+.then((result)=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```
+Hello World
+```
+
+---
+
+# ❌ Common Mistake
+
+Example:
+
+```javascript
+Promise.resolve(10)
+
+.then((value)=>{
+
+    value * 2;
+
+})
+
+.then((result)=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```
+undefined
+```
+
+Why?
+
+Because we forgot:
+
+```javascript
+return
+```
+
+Correct:
+
+```javascript
+return value * 2;
+```
+
+---
+
+# ⚠️ Promise Error Handling
+
+Promises handle errors using:
+
+```javascript
+.catch()
+```
+
+Example:
+
+```javascript
+const promise = new Promise((resolve,reject)=>{
+
+    reject("Something went wrong");
+
+});
 
 
+promise
+
+.then(result=>{
+
+    console.log(result);
+
+})
+
+.catch(error=>{
+
+    console.log(error);
+
+});
+```
+
+Output:
+
+```
+Something went wrong
+```
+
+---
+
+# Error Propagation
+
+Example:
+
+```javascript
+Promise.resolve()
+
+.then(()=>{
+
+    throw new Error("Failed");
+
+})
+
+.then(()=>{
+
+    console.log("Success");
+
+})
+
+.catch((error)=>{
+
+    console.log(error.message);
+
+});
+```
+
+Output:
+
+```
+Failed
+```
+
+When an error occurs:
+
+```
+.then()
+
+↓
+
+Skip remaining success handlers
+
+↓
+
+.catch()
+```
+
+---
+
+# Multiple Promises
+
+Real applications often run multiple async tasks.
+
+Example:
+
+```javascript
+const userPromise = getUser();
+
+const postPromise = getPosts();
+
+const commentPromise = getComments();
+```
+
+We need a way to handle all of them.
+
+JavaScript provides:
+
+```
+Promise.all()
+```
+
+---
+
+# Promise.all()
+
+`Promise.all()` waits for all promises to complete.
+
+Example:
+
+```javascript
+const p1 = Promise.resolve("User");
+
+const p2 = Promise.resolve("Posts");
+
+const p3 = Promise.resolve("Comments");
+
+
+Promise.all([p1,p2,p3])
+
+.then(result=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```
+[
+ "User",
+ "Posts",
+ "Comments"
+]
+```
+
+---
+
+# Promise.all Flow
+
+```
+Promise 1
+     |
+Promise 2  -----> Promise.all()
+     |
+Promise 3
+
+          ↓
+
+Wait for all
+
+          ↓
+
+Return results
+```
+
+---
+
+# Real Example
+
+Suppose a dashboard needs:
+
+```
+User Data
+
++
+
+Orders
+
++
+
+Notifications
+```
+
+Instead of:
+
+```
+Wait User
+
+↓
+
+Wait Orders
+
+↓
+
+Wait Notifications
+```
+
+We do:
+
+```javascript
+Promise.all([
+    getUser(),
+    getOrders(),
+    getNotifications()
+])
+.then(data=>{
+
+    console.log(data);
+
+});
+```
+
+All requests start together.
+
+---
+
+# Promise.all Failure
+
+Important:
+
+If one promise fails:
+
+```javascript
+Promise.all([
+    Promise.resolve("A"),
+    Promise.reject("Error"),
+    Promise.resolve("C")
+])
+```
+
+Result:
+
+```
+Rejected
+```
+
+The entire Promise.all fails.
+
+---
+
+# Promise.allSettled()
+
+Sometimes we want results of every promise even if some fail.
+
+Example:
+
+```javascript
+Promise.allSettled([
+
+Promise.resolve("Success"),
+
+Promise.reject("Failed")
+
+])
+
+.then(result=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```javascript
+[
+ {
+  status:"fulfilled"
+ },
+
+ {
+  status:"rejected"
+ }
+]
+```
+
+---
+
+# Promise.race()
+
+Returns the first completed promise.
+
+Example:
+
+```javascript
+const fast = new Promise(resolve=>{
+
+    setTimeout(()=>{
+
+        resolve("Fast");
+
+    },1000);
+
+});
+
+
+const slow = new Promise(resolve=>{
+
+    setTimeout(()=>{
+
+        resolve("Slow");
+
+    },3000);
+
+});
+
+
+Promise.race([fast,slow])
+
+.then(result=>{
+
+    console.log(result);
+
+});
+```
+
+Output:
+
+```
+Fast
+```
+
+---
+
+# Promise.race Flow
+
+```
+Promise A
+
+      \
+       \
+        ---> race()
+       /
+Promise B
+
+
+First completed wins
+```
+
+---
+
+# Real Backend Usage
+
+## API Timeout
+
+Example:
+
+```javascript
+Promise.race([
+
+fetch("/api/data"),
+
+timeoutPromise
+
+]);
+```
+
+If API takes too long:
+
+```
+Timeout wins
+```
+
+---
+
+# Promise Methods Comparison
+
+| Method | Purpose |
+|-|-|
+| Promise.all() | Wait for all, fail if one fails |
+| Promise.allSettled() | Wait for all, collect all results |
+| Promise.race() | First completed promise wins |
+| Promise.resolve() | Create resolved promise |
+| Promise.reject() | Create rejected promise |
+
+---
+
+# 🧠 Important Concepts
+
+## Promise is Eager
+
+A Promise starts executing immediately when created.
+
+Example:
+
+```javascript
+const p = new Promise(()=>{
+
+    console.log("Running");
+
+});
+```
+
+Output:
+
+```
+Running
+```
+
+Even without `.then()`.
+
+---
+
+## .then() Runs Later
+
+Example:
+
+```javascript
+Promise.resolve()
+
+.then(()=>{
+
+    console.log("Then");
+
+});
+
+
+console.log("End");
+```
+
+Output:
+
+```
+End
+Then
+```
+
+Because `.then()` callbacks go to the microtask queue.
+
+(We will study this deeply in Event Loop.)
+
+---
+
+# 📝 Summary
+
+- Promise solves callback hell.
+- `.then()` creates promise chains.
+- `return` passes data to the next step.
+- `.catch()` handles errors.
+- Promise.all() handles multiple async tasks together.
+- Promise.race() returns the fastest result.
+- Promise.allSettled() gives every result.
+- Promises are the foundation of async/await.
+
+---
+
+# 🎤 Interview Questions
+
+1. What is Promise chaining?
+2. Why is return important in `.then()`?
+3. Difference between Promise.all() and Promise.allSettled()?
+4. Difference between Promise.all() and Promise.race()?
+5. Are Promises synchronous or asynchronous?
+6. When does a Promise callback execute?
+7. Does creating a Promise start execution immediately?
