@@ -1678,3 +1678,560 @@ at main()
 This stack trace is generated directly from the Call Stack and shows the chain of function calls that led to the error.
 
 ---
+# Part 4 — Memory Management
+
+# 🌍 Why Learn Memory Management?
+
+Imagine this code.
+
+```javascript
+let a = 10;
+
+let b = a;
+
+b = 20;
+
+console.log(a);
+```
+
+Output
+
+```text
+10
+```
+
+Now look at this.
+
+```javascript
+let person1 = {
+    name: "Harsh"
+};
+
+let person2 = person1;
+
+person2.name = "Rahul";
+
+console.log(person1.name);
+```
+
+Output
+
+```text
+Rahul
+```
+
+A common question is:
+
+> "Why didn't changing `b` affect `a`, but changing `person2` affected `person1`?"
+
+The answer lies in **memory management**.
+
+---
+
+# 💾 What is Memory?
+
+Whenever a JavaScript program runs, it needs a place to store:
+
+- Variables
+- Objects
+- Arrays
+- Functions
+- Strings
+- Numbers
+
+That storage area is called **memory**.
+
+You can think of memory as a giant collection of storage boxes.
+
+```
+Memory
+
++---------+
+| Box 1   |
++---------+
+| Box 2   |
++---------+
+| Box 3   |
++---------+
+| ...     |
++---------+
+```
+
+Every value created by your program is stored somewhere in memory.
+
+---
+
+# ⚙️ How JavaScript Uses Memory
+
+The JavaScript Runtime mainly divides memory into two logical areas:
+
+```
+JavaScript Memory
+
+↓
+
+Stack Memory
+
+↓
+
+Heap Memory
+```
+
+Each serves a different purpose.
+
+---
+
+# 📚 Stack Memory
+
+Stack Memory stores:
+
+- Primitive values
+- Function execution contexts
+- Local variables
+- Function parameters
+
+Primitive values include:
+
+- Number
+- String
+- Boolean
+- Undefined
+- Null
+- BigInt
+- Symbol
+
+Example:
+
+```javascript
+let age = 21;
+let isStudent = true;
+```
+
+Conceptually:
+
+```
+Stack
+
++------------------+
+| isStudent : true |
++------------------+
+| age : 21         |
++------------------+
+```
+
+The values themselves are stored directly in the stack.
+
+This makes access very fast.
+
+---
+
+# 🚀 Characteristics of Stack Memory
+
+- Fast access
+- Small in size
+- Automatically managed
+- Stores primitive values
+- Follows the LIFO principle for execution contexts
+
+Think of the stack as a neat pile of books.
+
+Adding and removing items is very efficient.
+
+---
+
+# 🏗️ Heap Memory
+
+Heap Memory stores:
+
+- Objects
+- Arrays
+- Functions (as objects)
+- Dates
+- Maps
+- Sets
+
+Example:
+
+```javascript
+let student = {
+    name: "Harsh",
+    age: 21
+};
+```
+
+Conceptually:
+
+```
+Stack
+
+student
+
+↓
+
+0x001
+```
+
+```
+Heap
+
+0x001
+
+↓
+
+{
+    name: "Harsh",
+    age: 21
+}
+```
+
+Notice something important.
+
+The object itself is **not** stored in the stack.
+
+The stack stores a **reference (memory address)** to the object in the heap.
+
+---
+
+# 📦 Primitive vs Reference Values
+
+This is one of the most important distinctions in JavaScript.
+
+### Primitive Example
+
+```javascript
+let a = 10;
+
+let b = a;
+
+b = 50;
+```
+
+Memory:
+
+```
+Stack
+
+a → 10
+
+b → 10
+```
+
+After:
+
+```javascript
+b = 50;
+```
+
+```
+Stack
+
+a → 10
+
+b → 50
+```
+
+Changing `b` does not affect `a` because each variable stores its own value.
+
+---
+
+### Object Example
+
+```javascript
+let obj1 = {
+    age: 20
+};
+
+let obj2 = obj1;
+```
+
+Memory:
+
+```
+Stack
+
+obj1
+
+↓
+
+0x100
+```
+
+```
+Stack
+
+obj2
+
+↓
+
+0x100
+```
+
+Both variables point to the same object.
+
+Heap:
+
+```
+0x100
+
+↓
+
+{
+    age:20
+}
+```
+
+Now execute:
+
+```javascript
+obj2.age = 25;
+```
+
+Heap becomes:
+
+```
+0x100
+
+↓
+
+{
+    age:25
+}
+```
+
+Both variables still point to the same object.
+
+Therefore,
+
+```javascript
+console.log(obj1.age);
+```
+
+prints
+
+```text
+25
+```
+
+---
+
+# 🎨 Memory Visualization
+
+Let's visualize everything together.
+
+```javascript
+let x = 10;
+
+let y = x;
+
+let person = {
+    name: "Harsh"
+};
+```
+
+Memory:
+
+```
+Stack
+
+x → 10
+
+y → 10
+
+person
+
+↓
+
+0x200
+```
+
+Heap:
+
+```
+0x200
+
+↓
+
+{
+    name:"Harsh"
+}
+```
+
+Stack stores simple values directly.
+
+Heap stores complex objects.
+
+---
+
+# 🗑️ Garbage Collection
+
+Suppose we write:
+
+```javascript
+let user = {
+    name: "Harsh"
+};
+
+user = null;
+```
+
+Now ask yourself.
+
+Who is pointing to the object?
+
+Nobody.
+
+The object has become unreachable.
+
+```
+Heap
+
+{
+    name:"Harsh"
+}
+
+↑
+
+No references
+```
+
+JavaScript automatically detects such unreachable objects.
+
+Later,
+
+the **Garbage Collector** removes them from memory.
+
+This process frees memory for future use.
+
+---
+
+# ♻️ Why Garbage Collection is Important
+
+Without garbage collection,
+
+every object ever created would remain in memory forever.
+
+Large applications would eventually consume all available RAM.
+
+Garbage Collection prevents this by automatically cleaning up unused objects.
+
+One of JavaScript's biggest strengths is that developers usually don't need to manually free memory.
+
+---
+
+# ⚠️ Memory Leaks
+
+Although JavaScript has automatic garbage collection,
+
+memory leaks can still happen.
+
+A memory leak occurs when objects remain reachable even though your program no longer needs them.
+
+Example:
+
+```javascript
+let users = [];
+
+function addUser() {
+    users.push({
+        name: "Harsh"
+    });
+}
+```
+
+If `users` keeps growing forever,
+
+those objects remain referenced.
+
+The Garbage Collector cannot remove them.
+
+Eventually,
+
+memory usage increases continuously.
+
+Memory leaks are especially important in long-running applications like:
+
+- Node.js servers
+- Express applications
+- React applications
+- Browser tabs left open for hours
+
+---
+
+# 🔍 Behind the Scenes
+
+The JavaScript Engine allocates memory whenever you create a value.
+
+Primitive values are generally stored directly in stack memory.
+
+Objects are allocated in heap memory.
+
+The stack keeps references to those heap objects.
+
+The Garbage Collector periodically scans the heap.
+
+If it finds objects that are no longer reachable,
+
+it safely reclaims their memory.
+
+Modern engines like **V8** use advanced garbage collection algorithms to make this process efficient without significantly interrupting program execution.
+
+---
+
+# 🌍 Real-World Impact
+
+Understanding memory helps you write better applications.
+
+Examples:
+
+- Avoid accidental sharing of object references.
+- Understand why copying an object is different from copying a number.
+- Prevent memory leaks in Node.js servers.
+- Write efficient React state updates.
+- Understand why immutable patterns are useful.
+
+Memory management knowledge directly improves application performance and reliability.
+
+---
+
+# 💡 Did You Know?
+
+Many beginners say that JavaScript passes objects **"by reference."**
+
+A more precise explanation is:
+
+- JavaScript always passes arguments **by value**.
+- For objects, the **value being copied is the reference** (memory address).
+
+This subtle distinction explains many interview questions and common bugs.
+
+We'll explore this further in the chapter on functions and parameter passing.
+
+---
+
+# ⚠️ Common Misconceptions
+
+### ❌ Objects are stored in the stack.
+
+Incorrect.
+
+Objects are stored in the heap.
+
+The stack stores a reference to them.
+
+---
+
+### ❌ JavaScript developers never need to think about memory.
+
+Incorrect.
+
+While garbage collection is automatic, understanding memory is essential for writing efficient and bug-free applications.
+
+---
+
+### ❌ Garbage Collection happens immediately.
+
+Incorrect.
+
+The Garbage Collector decides when to run based on the engine's algorithms and current memory usage.
+
+---
