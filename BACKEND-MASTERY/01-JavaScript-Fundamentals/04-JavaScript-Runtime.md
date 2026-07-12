@@ -60,42 +60,6 @@ last_updated: July 2026
 - [Advantages](#-advantages)
 - [Limitations](#-limitations)
 
-## Part 6 — Synchronous vs Asynchronous Programming
-- [Synchronous Execution](#-synchronous-execution)
-- [Asynchronous Execution](#-asynchronous-execution)
-- [Blocking vs Non-blocking](#-blocking-vs-non-blocking)
-- [Examples](#-examples)
-
-## Part 7 — Runtime APIs
-- [Browser APIs](#-browser-apis)
-- [Node.js APIs](#-nodejs-apis)
-- [Timers API](#-timers-api)
-- [Fetch API](#-fetch-api)
-- [File System API](#-file-system-api)
-
-## Part 8 — Event Loop
-- [Why Do We Need the Event Loop?](#-why-do-we-need-the-event-loop)
-- [Callback Queue](#-callback-queue)
-- [Microtask Queue](#-microtask-queue)
-- [Macrotask Queue](#-macrotask-queue)
-- [Priority Rules](#-priority-rules)
-- [Complete Event Loop Flow](#-complete-event-loop-flow)
-
-## Part 9 — Internal Working
-- [How setTimeout() Works Internally](#-how-settimeout-works-internally)
-- [How fetch() Works Internally](#-how-fetch-works-internally)
-- [How fs.readFile() Works Internally](#-how-fsreadfile-works-internally)
-- [How crypto.pbkdf2() Works Internally](#-how-cryptopbkdf2-works-internally)
-
-## Part 10 — Chapter Wrap-up
-- [Common Mistakes](#-common-mistakes)
-- [Did You Know?](#-did-you-know)
-- [Real-World Impact](#-real-world-impact)
-- [Chapter Summary](#-chapter-summary)
-- [Revision Cheat Sheet](#-revision-cheat-sheet)
-- [Interview Questions](#-interview-questions)
-- [Practice Exercises](#-practice-exercises)
-- [Glossary](#-glossary)
 ---
 
 # 🎯 Learning Objectives
@@ -2234,4 +2198,292 @@ Incorrect.
 
 The Garbage Collector decides when to run based on the engine's algorithms and current memory usage.
 
+---# Part 5 — JavaScript is Single Threaded
+
 ---
+
+# 🎯 Learning Objectives
+
+After completing this topic, you will be able to:
+
+- Understand what a Process is.
+- Understand what a Thread is.
+- Differentiate between Process and Thread.
+- Explain why JavaScript is single-threaded.
+- Understand the advantages and limitations of a single-threaded language.
+
+---
+
+# 🤔 What is a Process?
+
+A **Process** is an instance of a program that is currently running.
+
+For example:
+
+- Chrome Browser
+- VS Code
+- Spotify
+- Node.js
+
+Each of these is a separate process managed by the Operating System.
+
+**Example**
+
+When you open Chrome three times, the OS creates multiple processes.
+
+```
+Operating System
+│
+├── Chrome (Process)
+├── VS Code (Process)
+├── Node.js (Process)
+└── Spotify (Process)
+```
+
+---
+
+# 🤔 What is a Thread?
+
+A **Thread** is the smallest unit of execution inside a process.
+
+Think of a process as a company.
+
+```
+Company (Process)
+
+↓
+
+Employees (Threads)
+```
+
+Each employee performs work for the same company.
+
+Similarly, a process can have multiple threads working together.
+
+---
+
+# 📊 Process vs Thread
+
+| Process | Thread |
+|----------|---------|
+| Independent | Lives inside a process |
+| Has its own memory | Shares process memory |
+| Heavyweight | Lightweight |
+| Slower to create | Faster to create |
+| Can contain multiple threads | Executes a task |
+
+---
+
+# 🤔 Why is JavaScript Single Threaded?
+
+JavaScript executes **one instruction at a time** using **one Call Stack**.
+
+It does **not** execute two JavaScript functions simultaneously on the same thread.
+
+```
+Call Stack
+
+↓
+
+main()
+
+↓
+
+greet()
+
+↓
+
+calculate()
+
+↓
+
+print()
+
+↓
+
+Empty
+```
+
+Only the function at the **top** of the Call Stack executes.
+
+---
+
+# 💻 Example 1
+
+```javascript
+console.log("A");
+console.log("B");
+console.log("C");
+```
+
+Output
+
+```
+A
+B
+C
+```
+
+Execution
+
+```
+main()
+
+↓
+
+console.log("A")
+
+↓
+
+console.log("B")
+
+↓
+
+console.log("C")
+```
+
+Each statement waits for the previous one to finish.
+
+---
+
+# 💻 Example 2
+
+```javascript
+function one() {
+    console.log("One");
+}
+
+function two() {
+    console.log("Two");
+}
+
+one();
+two();
+```
+
+Output
+
+```
+One
+Two
+```
+
+Execution
+
+```
+Global
+
+↓
+
+one()
+
+↓
+
+Global
+
+↓
+
+two()
+
+↓
+
+Global
+```
+
+The second function starts only after the first one completes.
+
+---
+
+# 💻 Example 3 — Blocking Code
+
+```javascript
+console.log("Start");
+
+for (let i = 0; i < 1_000_000_000; i++) {}
+
+console.log("End");
+```
+
+Output
+
+```
+Start
+End
+```
+
+Although there are only two `console.log()` statements, the loop blocks the Call Stack until it finishes.
+
+This is why JavaScript is called **single-threaded**.
+
+---
+
+# 🌍 Why Did JavaScript Choose a Single Thread?
+
+When JavaScript was created, its main job was to manipulate the web page (DOM).
+
+Imagine two threads changing the same button at the same time.
+
+Thread 1:
+
+```javascript
+button.innerText = "Login";
+```
+
+Thread 2:
+
+```javascript
+button.remove();
+```
+
+If both execute simultaneously, the browser could end up in an inconsistent state.
+
+Using a single thread avoids many synchronization problems and keeps DOM updates predictable.
+
+---
+
+# ✅ Advantages
+
+- Simpler programming model.
+- No race conditions while manipulating the DOM.
+- Easier debugging.
+- Lower synchronization overhead.
+
+---
+
+# ❌ Limitations
+
+- Long-running tasks block execution.
+- CPU-intensive work can freeze the UI.
+- Heavy computations should be moved to **Web Workers** (browser) or **Worker Threads** (Node.js).
+
+---
+
+# ⚠️ Common Misconceptions
+
+### ❌ JavaScript can execute multiple functions simultaneously.
+
+No. A single JavaScript thread executes one function at a time.
+
+### ❌ JavaScript cannot perform multiple tasks.
+
+It can, but asynchronous operations are handled with the help of the runtime (Event Loop, Web APIs, Node.js APIs), not by running multiple JavaScript functions simultaneously on the same thread.
+
+---
+
+# 📝 Summary
+
+- A Process is a running program.
+- A Thread executes code inside a process.
+- JavaScript uses one main thread for executing JavaScript code.
+- The Call Stack allows only one function to execute at a time.
+- Asynchronous behavior is achieved with the help of the JavaScript Runtime, not because JavaScript itself is multi-threaded.
+
+---
+
+# 🎤 Interview Questions
+
+1. What is the difference between a Process and a Thread?
+2. Why is JavaScript called single-threaded?
+3. What problems does a single-threaded model solve?
+4. Can JavaScript execute two functions simultaneously?
+5. If JavaScript is single-threaded, how does it handle asynchronous operations?
