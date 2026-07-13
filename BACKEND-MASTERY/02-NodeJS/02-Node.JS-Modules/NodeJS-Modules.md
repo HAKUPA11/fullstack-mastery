@@ -691,17 +691,3 @@ LOG: Student Loaded Successfully
 ```
 
 ---
-
-# ✅ Progress
-
-- [x] What are Modules?
-- [x] Types of Modules
-- [x] Developer-defined Modules
-- [x] `module.exports`
-
-⬜ `exports`
-⬜ `require()`
-⬜ CommonJS
-⬜ Module Caching
-⬜ ES Modules
-⬜ Mini Project
