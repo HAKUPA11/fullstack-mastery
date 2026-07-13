@@ -1,0 +1,16 @@
+# 📑 Table of Contents
+
+- [Learning Objectives](#learning-objectives)
+- [Prerequisites](#prerequisites)
+- [Why Modules?](#why-modules)
+- [What is a Module?](#what-is-a-module)
+- [Exporting](#exporting)
+- [Importing](#importing)
+- [Default Export vs Named Export](#default-export-vs-named-export)
+- [CommonJS vs ES Modules](#commonjs-vs-es-modules)
+- [Module Resolution](#module-resolution)
+- [Backend Examples](#backend-examples)
+- [Best Practices](#best-practices)
+- [Summary](#summary)
+- [Interview Questions](#interview-questions)
+- [Practice Exercises](#practice-exercises)

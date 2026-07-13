@@ -1,0 +1,58 @@
+📚 JavaScript Topics You Should Know Before Node.js
+
+These are the only advanced JavaScript topics we'll need during the Node.js journey.
+
+Phase 1 — Before Express (Must Know)
+✅ ES Modules
+✅ CommonJS
+✅ Destructuring
+✅ Spread Operator (...)
+✅ Rest Parameters
+✅ Template Literals
+✅ Default Parameters
+✅ Optional Chaining (?.)
+✅ Nullish Coalescing (??)
+
+These are used every day.
+
+Phase 2 — During Node.js
+✅ Map
+✅ Set
+
+Used occasionally for efficient data structures.
+
+Phase 3 — During Express
+✅ Object.freeze()
+
+Mostly for configuration objects and constants.
+
+Phase 4 — During Authentication & APIs
+✅ Memory Management (Basic)
+
+Just enough to understand:
+
+memory leaks
+server performance
+caching
+
+No deep V8 internals.
+
+Phase 5 — During Advanced Backend
+✅ Generators (Basic)
+✅ Iterators (Basic)
+
+Only because some libraries expose iterables and generators.
+
+❌ Skip Until Much Later
+
+These are useful but not necessary for becoming productive in backend development.
+
+❌ Reflect API
+❌ Proxy API
+❌ Property Descriptors
+❌ Symbols
+❌ WeakMap
+❌ WeakSet
+❌ Advanced Prototype Chain
+
+You can learn them after you're already building production applications.
