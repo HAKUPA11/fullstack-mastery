@@ -306,19 +306,3 @@ In this chapter, you learned:
 - ✅ Building a multi-file Node.js application
 
 ---
-
-# 🚀 What's Next?
-
-## Chapter 3 — JavaScript Runtime
-
-We'll cover:
-
-- JavaScript Runtime
-- Blocking vs Non-Blocking
-- Synchronous vs Asynchronous Programming
-- File System APIs (`fs`)
-- Callback API
-- Promise API
-- `console.time()` vs `performance.now()`
-
-This is where you'll begin understanding **why Node.js is fast** and how it handles multiple operations efficiently.
