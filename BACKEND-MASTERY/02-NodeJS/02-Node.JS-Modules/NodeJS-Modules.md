@@ -1,27 +1,4 @@
 # Node.js Chapter 2 - Node.js Modules
-
-## 📁 Folder Structure
-
-```
-01-NodeJS/
-│
-└── 02-NodeJS-Modules/
-    │
-    ├── NodeJS-Modules.md
-    │
-    ├── examples/
-    │   ├── 01-basic-module/
-    │   ├── 02-multiple-exports/
-    │   ├── 03-built-in-modules/
-    │   ├── 04-module-caching/
-    │   └── 05-es-modules/
-    │
-    ├── assignment/
-    │   └── assignment.js
-    │
-    └── mini-project/
-```
-
 ---
 
 # 📑 Table of Contents
@@ -35,21 +12,6 @@
 - Summary
 - Interview Questions
 - Assignment
-
----
-
-# 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Explain what a module is.
-- Understand why modules are used.
-- Differentiate between different types of modules.
-- Create your own modules.
-- Use built-in Node.js modules.
-- Organize code into multiple files.
-
----
 
 # 📖 What are Modules?
 
