@@ -823,22 +823,6 @@ appears in that order.
 
 ---
 
-# Lecture 4 Progress
-
-- [x] Blocking vs non-blocking operations
-- [x] Hands-on blocking vs non-blocking
-- [x] `os` module
-- [x] `crypto` module
-- [x] `crypto.randomBytes()`
-- [x] PBKDF2 introduction
-- [x] PBKDF2 arguments
-- [x] Salt
-- [x] Iterations
-- [x] Derived key
-- [x] Performance measurement
-- [x] Asynchronous PBKDF2
-- [x] Connection between PBKDF2 and non-blocking execution
-
 ## Next
 
 The next experiment is:
