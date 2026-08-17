@@ -1,0 +1,5 @@
+Node.js streams allow us to work with data piece by piece.
+Instead of loading the entire file into memory at once,
+we can process the data as chunks.
+This becomes especially useful when working with large files,
+network requests, uploads, downloads, and other continuous data.
