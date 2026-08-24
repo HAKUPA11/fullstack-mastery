@@ -1,40 +1,53 @@
+function Header() {
+    return (
+        <header>
+            <h1>React Store</h1>
+        </header>
+    );
+}
+
+function Product(props) {
+    return (
+        <div>
+            <h2>{props.name}</h2>
+            <p>Price: ₹{props.price}</p>
+            <p>Category: {props.category}</p>
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <div>
+            <Header />
+
+            <main>
+
+                <Product
+                    name="Laptop"
+                    price={50000}
+                    category="Electronics"
+                />
+
+                <Product
+                    name="Phone"
+                    price={30000}
+                    category="Electronics"
+                />
+
+                <Product
+                    name="Keyboard"
+                    price={2000}
+                    category="Accessories"
+                />
+
+            </main>
+        </div>
+    );
+}
+
 const rootElement = document.getElementById("root");
 
 const root = ReactDOM.createRoot(rootElement);
 
-let count = 0;
-
-function render() {
-    const element = React.createElement(
-        "div",
-        null,
-
-        React.createElement(
-            "h1",
-            null,
-            "React Counter"
-        ),
-
-        React.createElement(
-            "p",
-            null,
-            `Count: ${count}`
-        ),
-
-        React.createElement(
-            "button",
-            {
-                onClick : ()=>{
-                    count++;
-                    render()
-                }
-            },
-            "Increment"
-        )
-    );
-
-    root.render(element);
-    
-}
-
-render();
+root.render(<App />);
