@@ -77,10 +77,9 @@ Our initial structure:
 ```text
 FRONTEND-MASTERY/
 │
-├── 01-React-fundamentals/
-├── 02-JSX/
-├── 03-Components/
-└── 04-react-parcel/
+├── 01-React fundamentals/
+├── 02-React Components/
+└── 03-React Parcel/
 ```
 
 Open the terminal inside `04-react-parcel`.
