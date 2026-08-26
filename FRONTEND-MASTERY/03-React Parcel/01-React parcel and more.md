@@ -82,7 +82,7 @@ FRONTEND-MASTERY/
 └── 03-React Parcel/
 ```
 
-Open the terminal inside `04-react-parcel`.
+Open the terminal inside `03-React Parcel`.
 
 ---
 
@@ -97,7 +97,7 @@ npm init -y
 This creates a default `package.json` file. Our project now looks like:
 
 ```text
-04-react-parcel/
+03-React Parcel/
 │
 └── package.json
 ```
@@ -147,7 +147,7 @@ npm install react
 npm downloads React into our project. You will now see:
 
 ```text
-04-react-parcel/
+03-React Parcel/
 │
 ├── node_modules/
 ├── package-lock.json
@@ -219,7 +219,7 @@ node_modules/
 Create a `.gitignore` file in the root directory of the project:
 
 ```text
-04-react-parcel/
+03-React Parcel/
 │
 ├── node_modules/
 ├── .gitignore
@@ -289,7 +289,7 @@ Notice we use `<script type="module" src="./src/main.jsx"></script>` instead of 
 Create a `src/` folder, and inside it, create `main.jsx`:
 
 ```text
-04-react-parcel/
+03-React Parcel/
 │
 ├── src/
 │   └── main.jsx
@@ -410,7 +410,7 @@ Open your browser to the local server URL (usually `http://localhost:1234`). You
 ## 22. Project Architecture Overview
 
 ```text
-04-react-parcel/
+03-React Parcel/
 │
 ├── node_modules/      → Installed dependencies
 ├── src/
@@ -565,7 +565,7 @@ function App() {
             <Header/>
             <main>
                 {products.map((product) => (
-                    <Product category="{product.category}" key="{product.id}" name="{product.name}" price="{product.price}"/>
+                    <Product category={product.category} key={product.id} name={product.name} price={product.price}/>
                 ))}
             </main>
         </div>
