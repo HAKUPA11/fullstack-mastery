@@ -70,7 +70,7 @@ Instead of depending on CDN URLs, our project will have these packages installed
 
 Let's create our new project. Go to the folder where you keep your frontend projects (e.g., `FRONTEND-MASTERY/`).
 
-Create a new folder: `04-react-parcel`
+Create a new folder: `03-React Parcel`
 
 Our initial structure:
 
